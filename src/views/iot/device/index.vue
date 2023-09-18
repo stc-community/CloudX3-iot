@@ -51,6 +51,7 @@ onBeforeUnmount(() => {
           />
           {{ d.name }}
         </router-link>
+        <p class="text-xs text-slate-500">ID: {{ d.mid }}</p>
         <p class="text-sm font-semibold mt-5">Health</p>
         <div class="max-h-[100px] overflow-y-auto">
           <p

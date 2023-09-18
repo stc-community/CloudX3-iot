@@ -31,15 +31,15 @@ export default {
             icon: "uil:chart"
           }
         },
-        {
-          path: "/iot/device/:name/devices",
-          name: "iot.device.devices",
-          component: () => import("@/views/iot/device/detail/devices.vue"),
-          meta: {
-            title: "Devices",
-            icon: "ri:device-line"
-          }
-        },
+        // {
+        //   path: "/iot/device/:name/devices",
+        //   name: "iot.device.devices",
+        //   component: () => import("@/views/iot/device/detail/devices.vue"),
+        //   meta: {
+        //     title: "Devices",
+        //     icon: "ri:device-line"
+        //   }
+        // },
         {
           path: "/iot/device/:name/events",
           name: "iot.device.events",
