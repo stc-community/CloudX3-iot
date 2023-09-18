@@ -225,6 +225,7 @@ user:
 iot:
   "new device": New Device
   name: Name
+  mid: ID
   protocol: Protocol
   address: Address
   driver_sku: Driver SKU

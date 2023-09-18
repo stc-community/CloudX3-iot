@@ -225,6 +225,7 @@ user:
 iot:
   "new device": 接入新设备
   name: 设备名称
+  mid: 设备ID
   protocol: 通讯协议
   address: 链接地址
   driver_sku: 设备驱动SKU

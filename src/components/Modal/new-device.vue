@@ -9,12 +9,13 @@ import emitter from "@/utils/event-bus";
 const loading = ref(false);
 const form = reactive({
   name: "",
-  protocol: "HTTP",
-  address: "",
-  driver_sku: "",
-  driver_image: "",
-  instructions: "",
-  telemetries: ""
+  mid: ""
+  // protocol: "HTTP",
+  // address: "",
+  // driver_sku: "",
+  // driver_image: "",
+  // instructions: "",
+  // telemetries: ""
 
   // name: "test-thermometer",
   // protocol: "HTTP",
@@ -39,8 +40,8 @@ const res = ref({
 });
 const handleSubmit = () => {
   const formData = clone(form);
-  formData.instructions = window.btoa(formData.instructions);
-  formData.telemetries = window.btoa(formData.telemetries);
+  // formData.instructions = window.btoa(formData.instructions);
+  // formData.telemetries = window.btoa(formData.telemetries);
 
   loading.value = true;
   loadData(res, "iot.device.add", formData, loading, () => {
