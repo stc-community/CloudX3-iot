@@ -97,15 +97,19 @@ const submitItem = async () => {
     const clonePayloadForm = clone(payloadForm);
     clonePayloadForm["data"] = window.btoa(clonePayloadForm["data"]);
 
+    console.log("payload");
     console.log(JSON.stringify(clonePayloadForm));
 
     // wrap post data
     cloneFormData["index"] = "";
-    cloneFormData["payload"] = clonePayloadForm;
+    cloneFormData["payload"] = window.btoa(JSON.stringify(clonePayloadForm));
   }
 
   // auto fill device name value
   cloneFormData["deviceName"] = route.params.name;
+
+  console.log("Data send to chain");
+  console.log(JSON.stringify(cloneFormData));
 
   try {
     await (
