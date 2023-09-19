@@ -18,7 +18,7 @@ const { t } = useLang();
 const { nostrStore, relay } = useNostr();
 const route = useRoute();
 const router = useRouter();
-const { data, loading, getIotDevices } = useIotDevices();
+const { data, getIotDevices } = useIotDevices();
 getIotDevices();
 
 const children = computed(() => {
@@ -49,11 +49,14 @@ const accountStore = useAccountStore();
 
 const currentDevice = ref(route.params.name);
 const onDeviceChange = v => {
+  const mid = data.devices.find(i => i.name === v)?.mid;
+
   router
     .push({
       name: route.name,
       params: {
-        name: v
+        name: v,
+        mid
       }
     })
     .then(() => {
@@ -72,10 +75,7 @@ const onDeviceChange = v => {
           @change="onDeviceChange(currentDevice)"
         >
           <option disabled>Pick a device</option>
-          <option v-if="loading" :value="currentDevice">
-            {{ currentDevice }}
-          </option>
-          <option v-else v-for="r in data.devices" :value="r.name">
+          <option v-for="r in data.devices" :value="r.name">
             {{ r.name }}
           </option>
         </select>

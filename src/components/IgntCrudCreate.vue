@@ -5,8 +5,14 @@ import { reactive, computed } from "vue";
 import { IgntModal } from "@ignt/vue-library";
 import { useRoute } from "vue-router";
 import { clone } from "lodash";
+import { useIotEvents } from "@/hooks/useIotEvents";
 
 const route = useRoute();
+const { getIotDeviceInstructions, instructions } = useIotEvents();
+
+if (route.name === "iot.device.events") {
+  getIotDeviceInstructions();
+}
 
 const props = defineProps({
   storeName: {
@@ -31,6 +37,14 @@ const props = defineProps({
     }
   }
 });
+
+const payloadForm = reactive({
+  payload_type: "subscribe",
+  name: route.params.name,
+  path: "path",
+  data: "data"
+});
+
 const emit = defineEmits(["close"]);
 const formData = reactive<any>(props.initalData);
 const { address } = useAddress();
@@ -80,8 +94,14 @@ const creator = address.value;
 const submitItem = async () => {
   const cloneFormData = clone(formData);
   if (route.name === "iot.device.events") {
+    const clonePayloadForm = clone(payloadForm);
+    clonePayloadForm["data"] = window.btoa(clonePayloadForm["data"]);
+
+    console.log(JSON.stringify(clonePayloadForm));
+
+    // wrap post data
     cloneFormData["index"] = "";
-    cloneFormData["payload"] = window.btoa(cloneFormData["payload"]);
+    cloneFormData["payload"] = clonePayloadForm;
   }
 
   // auto fill device name value
@@ -125,7 +145,26 @@ const submitItem = async () => {
   >
     <template #body>
       <div class="my-4 w-[500px]" />
-      <div v-for="field in itemFieldsFiltered" :key="'field_' + field">
+      <template v-if="route.name === 'iot.device.events'">
+        <div>
+          <label class="sp-label capitalize-first-letter">Type</label>
+          <select v-model="payloadForm.payload_type" class="sp-input">
+            <option value="subscribe">Subscribe</option>
+            <option value="publish">Publish</option>
+          </select>
+        </div>
+        <div>
+          <label class="sp-label capitalize-first-letter">Path</label>
+          <select v-model="payloadForm.path" class="sp-input">
+            <option :value="i" v-for="i in instructions">{{ i }}</option>
+          </select>
+        </div>
+        <div>
+          <label class="sp-label capitalize-first-letter">Data</label>
+          <input v-model="payloadForm.data" class="sp-input" />
+        </div>
+      </template>
+      <div v-else v-for="field in itemFieldsFiltered" :key="'field_' + field">
         <label :for="`p${field.name}`" class="sp-label capitalize-first-letter">
           {{ field.name }}
         </label>

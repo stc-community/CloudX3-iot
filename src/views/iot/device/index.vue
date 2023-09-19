@@ -42,7 +42,10 @@ onBeforeUnmount(() => {
       <div class="card-body">
         <router-link
           class="card-title text-primary hover:cursor-pointer hover:text-primary-focus"
-          :to="{ name: 'iot.device.metrics', params: { name: d.name } }"
+          :to="{
+            name: 'iot.device.metrics',
+            params: { name: d.name, mid: d.mid }
+          }"
         >
           <IconifyIconOnline
             icon="mingcute:device-line"
