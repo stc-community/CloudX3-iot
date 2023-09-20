@@ -163,7 +163,7 @@ const submitItem = async () => {
             <option :value="i" v-for="i in instructions">{{ i }}</option>
           </select>
         </div>
-        <div>
+        <div class="mb-10">
           <label class="sp-label capitalize-first-letter">Data</label>
           <input v-model="payloadForm.data" class="sp-input" />
         </div>
