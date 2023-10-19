@@ -4,8 +4,8 @@
   "Theme": "light",
   "Relay": [
     {
-      "name": "gw105",
-      "url": "wss://nostr.gw105.oneitfarm.com",
+      "name": "gw103",
+      "url": "wss://nostr.gw103.oneitfarm.com",
       "lat": 34.7732,
       "long": 113.722,
       "city": "Shanghai",
