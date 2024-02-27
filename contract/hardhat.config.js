@@ -68,7 +68,7 @@ module.exports = {
       chainId: 5611,
     }
   },
-  defaultNetwork: "opbnb",
+  defaultNetwork: "sepolia",
   gasReporter: {
     enabled: REPORT_GAS,
     currency: "USD",
