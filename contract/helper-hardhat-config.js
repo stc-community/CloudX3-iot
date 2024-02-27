@@ -116,6 +116,50 @@ const networkConfig = {
     fundAmount: "100", // 100
     automationUpdateInterval: "30"
   },
+  11155111: {
+    name: "sepolia",
+
+    // Deploy Operator contract parameters
+    owner: "0x72Cd49C4434b583a5f09d10FCe91443554706316",
+
+    // linkToken address
+    linkToken: "0x4E9bfAB50AE5aA47838921450BBc1b12a81798ba",
+
+    userHubContract: "0x51923dcd6Bb170bd28AD4425A6Dd5cD0456F8e52",
+    userHubConfigContract: "0x2E5D5a169AD52Ac45B37E5cA74155D7b725eB70D",
+
+    // Oracle contract address
+    oracle: "0x84f146aD17078D9C278832768B0cd9EA597E0E67",
+
+    // Serverless Oracle contract address
+    ZtControl: "0x35035ABEfe99197A70adf322430C33c391160aa7",
+    mesh: "0x844691e3D56D57FfbaF8E396d322BD93023aa9fB",
+    cod: "0xe407b4874ba25c86E0Ed5988b1f976Ec539DB3C5",
+    // Container contract
+    pod: "0xC7F694fbbc168CE02F2ce9cE84d748957F283336",
+    deployment: "0x6Ca351492b3b137aBb94052B847Af891bb067eFe",
+    // cluster: "0x2BB9Bf849C4C5AeCf16209750b9b67375929d872",
+    // node: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0",
+    // ApiMarket
+    STCMarket: "0x6051273DB68F2af68617589f30F8a91f859e5b82",
+    STCMarketToken: "0x8b321Dde4CAe93848f756895fdb34E889A6c831b",
+
+    //Serverless Site Info
+    sitename: "gw103",
+    sitehost: "http://192.168.103.120:32575",
+    ztMeshJob: "84981edb58a2455aade2e9d797ae86f1",
+    codjob: "84981edb58a2455aade2e9d797ae86f1",
+    deploymentJobId: "d61b61a4e6684116be70d6ec6e58b52e",
+    podJobId: "c1efad95d1b34cc9b3e2ee06802a2a6d",
+    nodeJobId: "aa7198c0190f4cc29d4e4470c08f6391",
+
+    // Parameters for calling the setAuthorizedSenders method in the Operator contract
+    authorizedSenders: "0xb56f8d912326Ed22a18E2DdcBBB7BC1B78E88Ad7",
+
+    fee: "0.1",
+    fundAmount: "100", // 100
+    automationUpdateInterval: "30"
+  },
 
 };
 const developmentChains = ["hardhat", "localhost"]
