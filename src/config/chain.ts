@@ -195,7 +195,7 @@ const chains: Chain[] = [
   }
 ];
 
-let currentChain: ChainName = "Filecoin - Calibration testnet";
+let currentChain: ChainName = "Sepolia";
 export function setCurrentChain(name: ChainName) {
   currentChain = name;
 }
