@@ -36,7 +36,7 @@ jobs:
           version: 7
 
       - name: Install all dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build
         run: pnpm build # The build command of your project
