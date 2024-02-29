@@ -1,0 +1,27 @@
+type = "directrequest"
+schemaVersion = 1
+name = "Get > String - (TOML)"
+externalJobID = "84981edb-58a2-455a-ade2-e9d797ae86f1"
+forwardingAllowed = false
+maxTaskDuration = "0s"
+contractAddress = "0x84f146aD17078D9C278832768B0cd9EA597E0E67"
+minContractPaymentLinkJuels = "0"
+observationSource = """
+    decode_log   [type="ethabidecodelog"
+                  abi="OracleRequest(bytes32 indexed specId, address requester, bytes32 requestId, uint256 payment, address callbackAddr, bytes4 callbackFunctionId, uint256 cancelExpiration, uint256 dataVersion, bytes data)"
+                  data="$(jobRun.logData)"
+                  topics="$(jobRun.logTopics)"]
+
+    decode_cbor  [type="cborparse" data="$(decode_log.data)"]
+    headers      [type="base64decode" input="$(decode_cbor.headers)"]
+    requestData  [type="base64decode" input="$(decode_cbor.requestData)"]
+    fetch        [type="http" method="$(decode_cbor.method)" url="$(decode_cbor.url)" headers="$(headers)" requestData="$(requestData)" allowUnrestrictedNetworkAccess="true"]
+    encode_data  [type="ethabiencode" abi="(bytes32 requestId, bytes32 requestUID, string value)" data="{ \\"requestId\\": $(decode_log.requestId), \\"requestUID\\": $(decode_cbor.requestUID), \\"value\\": $(fetch) }"]
+    encode_tx    [type="ethabiencode"
+                  abi="fulfillOracleRequest2(bytes32 requestId, uint256 payment, address callbackAddress, bytes4 callbackFunctionId, uint256 expiration, bytes calldata data)"
+                  data="{\\"requestId\\": $(decode_log.requestId), \\"payment\\":   $(decode_log.payment), \\"callbackAddress\\": $(decode_log.callbackAddr), \\"callbackFunctionId\\": $(decode_log.callbackFunctionId), \\"expiration\\": $(decode_log.cancelExpiration), \\"data\\": $(encode_data)}"
+                  ]
+    submit_tx    [type="ethtx" to="0x84f146aD17078D9C278832768B0cd9EA597E0E67" data="$(encode_tx)"]
+
+    decode_log -> decode_cbor -> headers -> requestData -> fetch -> encode_data -> encode_tx -> submit_tx
+"""
